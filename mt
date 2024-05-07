@@ -18,7 +18,7 @@ dmark_check() {
    line=$(dig _dmarc.$1 txt | grep DMARC 2>/dev/null) 
    if [ ! -z "$line" ]; then 
      p=$(echo $line | cut -d= -f3 | cut -d\; -f 1) 
-     if [ "$p" = "nome" ]; then
+     if [ "$p" = "none" ]; then
         echo DMARC Policy not configured 
      else 
         echo DMARC Policy: $p 
