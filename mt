@@ -60,19 +60,13 @@ done
 [ ! -z "${file}" -a ! -z "${host}" ] && usage
 [ ! -z "${file}" -a ! -f "${file}" ] && usage
 
+[ ! -z "${file}" ] && hosts=$(cat $file) || hosts=$host
 
-if [ ! -z "${host}" ]; then 
-   echo $host: 
+for host in ${hosts}; do 
+   echo -e "\n$host:"
    mx_check $host
    spf_check $host
    dmark_check $host
-else 
-   for host in $(cat $file); do 
-      echo -e "\n$host:"
-      mx_check $host
-      spf_check $host
-      dmark_check $host
-   done 
-fi 
+done 
 exit 0 
 
